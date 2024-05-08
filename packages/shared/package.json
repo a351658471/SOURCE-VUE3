@@ -1,0 +1,15 @@
+{
+  "name": "shared",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "module": "dist/shared.esm-bundler.js",
+  "buildOptions":{
+    "name":"VueShared",
+    "formats":[
+      "cjs",
+      "esm-bundler"
+      
+    ]
+  }
+}
