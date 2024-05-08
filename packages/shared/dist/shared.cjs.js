@@ -1,6 +1,8 @@
 'use strict';
 
-let b = 1;
+const isObject = (value) => typeof value === 'object' && value != null;
+const extend = Object.assign;
 
-exports.b = b;
+exports.extend = extend;
+exports.isObject = isObject;
 //# sourceMappingURL=shared.cjs.js.map

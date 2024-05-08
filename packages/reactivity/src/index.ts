@@ -1,4 +1,6 @@
-let a = 1
 export {
-    a
-}
+    reactive,
+    shallowReactive,
+    readonly,
+    shallowReadonly
+} from './reactive'
