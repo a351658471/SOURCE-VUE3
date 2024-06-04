@@ -56,6 +56,7 @@ var VueReactivity = (function (exports) {
           dep.add(activeEffect);
       }
   }
+  //找属性对应的effect 让其执行（数组、对象）
   function trigger(target, type, key, newValue, oldValue) {
       const depsMap = targetMap.get(target);
       if (!depsMap)
@@ -72,6 +73,18 @@ var VueReactivity = (function (exports) {
                   add(dep);
               }
           });
+      }
+      else {
+          //可能是对象
+          if (key != undefined) {
+              add(depsMap.get(key));
+          }
+          switch (type) {
+              case 0 /* TriggerOrTypes.ADD */:
+                  if (isArray(target) && isIntegerKey(key)) {
+                      add(depsMap.get('length'));
+                  }
+          }
       }
       effects.forEach((effect) => {
           effect();

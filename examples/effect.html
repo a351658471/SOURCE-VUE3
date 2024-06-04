@@ -14,7 +14,7 @@
         let state = reactive({name:'kk',age:1, arr:[1,2,3]})
         effect(()=> {
             console.log("🚀 ~ state:", state)
-            app.innerText = state.arr[2]
+            app.innerText = state
         })
         setTimeout(() => {
             state.arr.length = 1
