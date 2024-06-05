@@ -179,11 +179,46 @@ var VueReactivity = (function (exports) {
       return proxy;
   }
 
+  const convert = (val) => (isObject(val) ? reactive(val) : val);
+  function ref(value) {
+      return createRef(value);
+  }
+  function shallowRef(value) {
+      return createRef(value, true);
+  }
+  class RefImpl {
+      rawValue;
+      shallow;
+      _value;
+      __v_isRef = true;
+      constructor(rawValue, shallow) {
+          this.rawValue = rawValue;
+          this.shallow = shallow;
+          this._value = shallow ? rawValue : convert(rawValue);
+      }
+      get value() {
+          track(this, 0 /* TrackOpTypes.GET */, "value");
+          return this._value;
+      }
+      set value(newValue) {
+          if (hasChanged(newValue, this._value)) {
+              this.rawValue = newValue;
+              this._value = this.shallow ? newValue : convert(newValue);
+              trigger(this, 1 /* TriggerOrTypes.SET */, "value", newValue);
+          }
+      }
+  }
+  function createRef(rawValue, shallow = false) {
+      return new RefImpl(rawValue, shallow);
+  }
+
   exports.effect = effect;
   exports.reactive = reactive;
   exports.readonly = readonly;
+  exports.ref = ref;
   exports.shallowReactive = shallowReactive;
   exports.shallowReadonly = shallowReadonly;
+  exports.shallowRef = shallowRef;
 
   return exports;
 
