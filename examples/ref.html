@@ -11,15 +11,13 @@
     <script>
         let app = document.getElementById('app')
         let { reactive, effect, ref, shallow } =VueReactivity
-        let state = ref({
-            name:'zf'
-        })
+        let state = ref(0)
         console.log("🚀 ~ state:", state)
         effect(()=> {
-            app.innerText = state.value.name
+            app.innerText = state.value
         })
         setTimeout(() => {
-            state.value.name = 'jw'
+            state.value = 'jw'
         }, 1000);
     </script>
 </body>
