@@ -3,10 +3,8 @@ node_modules
 .idea
 package-lock.json
 # dist*
-/packages/*/dist/
-dist-ssr
+packages/*/dist/
 *.local
-src/assets/sprites/*.*
 # env/
 # *.env.development
 # Log files
