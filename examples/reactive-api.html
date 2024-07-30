@@ -6,12 +6,18 @@
     <title>Document</title>
   </head>
   <body>
+    <div id="app"></div>
     <script src="../packages/reactivity/dist/reactivity.global.js"></script>
     <script>
-      let { reactive, shallowReactive, readonly, shallowReadonly } =VueReactivity
-      let state = readonly({name:'zf',age:{n:12}})
-      state.age.n = 1
-        // console.log("🚀 ~ state:", state.age)
+      let app = document.getElementById('app')
+      let { reactive, shallowReactive, readonly, shallowReadonly , effect} =VueReactivity
+      let state = reactive({name:'zf',age:{n:12},hobby:['reading','swimming']})
+      effect(()=> {
+            app.innerText = state.age.n
+        })
+        setTimeout(() => {
+          state.age.n = 3
+        }, 1000);
         
     </script>
   </body>
