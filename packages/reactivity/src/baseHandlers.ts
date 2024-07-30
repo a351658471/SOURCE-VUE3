@@ -28,10 +28,12 @@ function createGetter(isReadonly = false, shallow = false){
 }
 function createSetter(shallow = false){
     return (target, key, value, receiver)=> {
+        console.log("🚀 ~ return ~ target:", target)
         const oldValue = target[key]
         let hasKey = isArray(target) && isIntegerKey(key) ? Number(key) < target.length : hasOwn(target, key)
         const result = Reflect.set(target, key, value,  receiver)
         if(!hasKey){
+            
             //新增
             trigger(target, TriggerOrTypes.ADD, key, value)
         }else if(hasChanged(oldValue, value)){
