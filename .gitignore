@@ -3,7 +3,7 @@ node_modules
 .idea
 package-lock.json
 # dist*
-dist
+package/*/dist/
 dist-ssr
 *.local
 src/assets/sprites/*.*
